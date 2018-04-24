@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.stark.ommbc.MainActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <!--<Button-->
+        <!--android:id="@+id/test_tab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="110dp"-->
+        <!--android:background="#003E5E"-->
+        <!--android:text="Test Tab"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/button2"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/button2" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="9dp"-->
+        <!--android:background="#003E5E"-->
+        <!--android:text="Login"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/imageView"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/button2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="12dp"-->
+        <!--android:background="#003E5E"-->
+        <!--android:text="Register"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/test_tab"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/button"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25sp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="250dp"
+            android:layout_height="190dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electr\u00F3nico"
+            android:drawableLeft="@drawable/ic_profile"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_profile"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="#003E5E"
+            android:textColorHint="#003E5E"
+            android:theme="@style/TextLabel"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input__user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="#003E5E"
+            android:textColorHint="#003E5E"
+            android:theme="@style/TextLabel"/>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/menu_button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#003E5E"
+            android:text="Login"
+            android:textColor="@android:color/white" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/menu_button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@null"
+            android:text="No eres miembro? Registrate!"
+            android:textAllCaps="false"
+            android:textColor="#003E5E" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="43dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+</android.support.constraint.ConstraintLayout>
