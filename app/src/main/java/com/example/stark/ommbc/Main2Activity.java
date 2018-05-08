@@ -12,6 +12,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,26 +40,52 @@ public class Main2Activity extends AppCompatActivity {
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerview.setAdapter(qAdapter);
 
-        recyclerview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerview, new RecyclerTouchListener.ClickListener(){
+        prepareQuoteData();
+        /*recyclerview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerview, new RecyclerTouchListener.ClickListener(){
             @Override
             public void onClick(View view, int position){
                 Quote quote = quoteList.get(position);
                 Toast.makeText(getApplicationContext(), quote.getName() + "fue selecionado!", Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void on LongClick(View view, int position){
-                //add event for long click
-            }
         }));
-
         prepareQuoteData();
-
+        */
     }
 
     private void prepareQuoteData(){
-        //get quote info and displays to view
+        BigDecimal bd = new BigDecimal("1.5");
 
-        qAdapter.notifyDataSetChange();
+
+        // Aqui se craqshea, tal vez por los parsings, checa como agregar un quote a la lista
+        Quote q = new Quote("EUR/USD", 123213,bd, 124,bd,34 ,bd,bd,bd );
+        quoteList.add(q);
+
+
+
+            //Quote qu = new Quote(
+              //      "EUR/USD",
+                //    Long.parseLong("1234124123"),
+                  //  new BigDecimal("1.55"),
+                    //Integer.parseInt("123"),
+                    //new BigDecimal("2.11"),
+                    //Integer.parseInt("123"),
+                    //new BigDecimal("2.14"),
+                    //new BigDecimal("2.15"),
+                    //new BigDecimal("2.15"));
+            //quoteList.add(qu);
+
+     /*    quoteList.add(new Quote(
+                "EUR/GBP",
+                Long.parseLong("1.22"),
+                new BigDecimal("1.22"),
+                Integer.parseInt("200"),
+                new BigDecimal("200"),
+                Integer.parseInt("200"),
+                new BigDecimal("200"),
+                new BigDecimal("200"),
+                new BigDecimal("200")));
+                */
+
+        qAdapter.notifyDataSetChanged();
     }
 }

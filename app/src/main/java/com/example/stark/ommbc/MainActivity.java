@@ -1,13 +1,12 @@
 package com.example.stark.ommbc;
 
-
-        import android.content.Intent;
-        import android.content.SharedPreferences;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.view.View.OnClickListener;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.view.View.OnClickListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
                     Evaluar si el correo y contra existen
                 */
                 //Intent MyIntent = new Intent(MainActivity.this, List.class);
-                Intent MyIntent = new Intent(MainActivity.this,Activity_Tabbed.class);
+                //Intent MyIntent = new Intent(MainActivity.this,Activity_Tabbed.class);
+                Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
                 startActivity(MyIntent);
                 finish(); //Block back button
 

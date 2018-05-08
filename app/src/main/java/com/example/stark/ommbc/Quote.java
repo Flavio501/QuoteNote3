@@ -25,7 +25,7 @@ public class Quote extends Observable{
             BigDecimal Low,
             BigDecimal Open) {
         this.Name = Name;
-        this.timestamp = timestamp;
+       this.timestamp = timestamp;
         this.bidBig = bidBig;
         this.bidPoints = bidPoints;
         this.offerBig = offerBig;
@@ -62,7 +62,7 @@ public class Quote extends Observable{
         return this.Name;
     }
     public long getTimestamp() {
-        return this.timestamp;
+       return this.timestamp;
     }
     public BigDecimal getBidBig() {
         return this.bidBig;
@@ -88,7 +88,7 @@ public class Quote extends Observable{
 
     public void printParams() {
         System.out.println(getName() + " "
-                + getTimestamp() + " "
+               + getTimestamp() + " "
                 + getBidBig().toString()
                 + getBidPoints() + " "
                 + getOfferBig().toString()
@@ -113,6 +113,7 @@ public class Quote extends Observable{
     public void measurementsChanged() {
         setChanged();
         notifyObservers(new Wrapper(Name,timestamp,bidBig,bidPoints,offerBig,offerPoints,High,Low,Open));
+        //notifyObservers(new Wrapper(Name,bidBig,bidPoints,offerBig,offerPoints,High,Low,Open));
         //notifyObservers(this);
     }
 
