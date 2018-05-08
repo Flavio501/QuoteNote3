@@ -33,11 +33,11 @@ public class QuoteAdapter RecyclerView.Adapter<QuoteAdapter.MyViewHolder>{
         public void onBindViewHolder(MyViewHolder holder, int position){
             Quote q = quoteList.get(position);
             holder.Name.setText(quote.getName());
-            holder.timestamp.setText(quote.gettimestamp());
-            holder.bidBig.setText(quote.getbidBig());
-            holder.bidPoints.setText(quote.getbidPoints);
-            holder.offerBig.setText(quote.getofferBig);
-            holder.offerPoints.setText(quote.getofferPoints());
+            holder.timestamp.setText(quote.getTimestamp());
+            holder.bidBig.setText(quote.getBidBig());
+            holder.bidPoints.setText(quote.getBidPoints);
+            holder.offerBig.setText(quote.getOfferBig);
+            holder.offerPoints.setText(quote.getOfferPoints());
             holder.High.setText(quote.getHigh());
             holder.Low.setText(quote.getLow());
             hodler.Open.setText(quote.getOpen());
