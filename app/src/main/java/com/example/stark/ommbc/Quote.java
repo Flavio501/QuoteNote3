@@ -1,10 +1,12 @@
 package com.example.stark.ommbc;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Observable;
 
-public class Quote extends Observable{
+public class Quote extends Observable implements Serializable{
 
+    private long serialVersionUID;
     private String Name;
     private long timestamp;
     private BigDecimal bidBig;

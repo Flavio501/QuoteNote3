@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import java.util.List;
 
 public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder>{
     private List<Quote> quoteList;
+    AdapterView.OnItemClickListener mItemClickListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Name, timestamp, bidBig, bidPoints, offerBig, offerPoints, High, Low, Open;

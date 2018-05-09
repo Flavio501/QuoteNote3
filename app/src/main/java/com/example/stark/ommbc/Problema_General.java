@@ -41,12 +41,11 @@ public class Problema_General extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problema__general);
-        final int numero = getIntent().getIntExtra("Quote",0);
-        final String text = getIntent().getStringExtra("Texto");
+        Quote quote = (Quote) getIntent().getSerializableExtra("Quote");
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle("Quote Details");
         TextView espacio_texto = (TextView)findViewById(R.id.espacio_texto);
-        espacio_texto.setText("Quote Values: "+text /* Imprimir los valores del Quote */);
+        espacio_texto.setText(quote.returnParams());
         FloatingActionButton help = (FloatingActionButton)findViewById(R.id.help);
         //FloatingActionButton send = (FloatingActionButton)findViewById(R.id.send);
         final FloatingActionButton favorite = (FloatingActionButton)findViewById(R.id.favorite);

@@ -1,5 +1,6 @@
 package com.example.stark.ommbc;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -47,6 +48,19 @@ public class Main2Activity extends AppCompatActivity {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerview.setAdapter(qAdapter);
+        recyclerview.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, recyclerview ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Intent myIntent = new Intent(Main2Activity.this,Problema_General.class);
+                        myIntent.putExtra("Quote",quoteList.get(position));
+                        startActivity(myIntent);
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
         try{
             prepareQuoteData();
