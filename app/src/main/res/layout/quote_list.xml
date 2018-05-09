@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/row_padding_vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
+
+    <!--Name-->
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/title"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!--TimeStamp-->
+    <!--TextView
+        android:id="@+id/timestamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Name" />-->
+
+    <!--bidBig-->
+    <TextView
+        android:id="@+id/bidBig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/title"/>
+
+    <!--bidPoints-->
+    <TextView
+        android:id="@+id/bidPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--offerBig-->
+    <TextView
+        android:id="@+id/offerBig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--offerPoints-->
+    <TextView
+        android:id="@+id/offerPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--High-->
+    <TextView
+        android:id="@+id/High"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--Low-->
+    <TextView
+        android:id="@+id/Low"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--Open-->
+    <TextView
+        android:id="@+id/Open"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
