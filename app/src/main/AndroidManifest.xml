@@ -21,10 +21,6 @@
         <activity android:name=".List" />
         <activity android:name=".Problema_General" />
         <activity
-            android:name=".Activity_Tabbed"
-            android:label="@string/title_activity__tabbed"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".RegisterController"
             android:screenOrientation="portrait" />
         <activity android:name=".Main2Activity"></activity>

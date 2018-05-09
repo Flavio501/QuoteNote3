@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
                     Evaluar si el correo y contra existen
                 */
                 //Intent MyIntent = new Intent(MainActivity.this, List.class);
-                //Intent MyIntent = new Intent(MainActivity.this,Activity_Tabbed.class);
                 Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
                 startActivity(MyIntent);
                 finish(); //Block back button

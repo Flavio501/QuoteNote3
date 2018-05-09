@@ -24,15 +24,14 @@
     <!--bidBig-->
     <TextView
         android:id="@+id/bidBig"
-        android:layout_width="25dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/title"
         android:layout_below="@id/Name"/>
 
     <!--bidPoints-->
     <TextView
         android:id="@+id/bidPoints"
-        android:layout_width="25dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"
         android:layout_toRightOf="@id/bidBig"/>
@@ -40,14 +39,14 @@
     <!--offerBig-->
     <TextView
         android:id="@+id/offerBig"
-        android:layout_width="25dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bidBig" />
 
     <!--offerPoints-->
     <TextView
         android:id="@+id/offerPoints"
-        android:layout_width="25dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bidBig"
         android:layout_toRightOf="@id/offerBig"/>
