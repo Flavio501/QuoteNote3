@@ -21,54 +21,59 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <!--TimeStamp-->
-    <!--TextView
-        android:id="@+id/timestamp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Name" />-->
-
     <!--bidBig-->
     <TextView
         android:id="@+id/bidBig"
-        android:layout_width="match_parent"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/title"/>
+        android:textColor="@color/title"
+        android:layout_below="@id/Name"/>
 
     <!--bidPoints-->
     <TextView
         android:id="@+id/bidPoints"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Name"
+        android:layout_toRightOf="@id/bidBig"/>
 
     <!--offerBig-->
     <TextView
         android:id="@+id/offerBig"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bidBig" />
 
     <!--offerPoints-->
     <TextView
         android:id="@+id/offerPoints"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bidBig"
+        android:layout_toRightOf="@id/offerBig"/>
 
     <!--High-->
+    <!--
     <TextView
         android:id="@+id/High"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+        -->
 
     <!--Low-->
+    <!--
     <TextView
         android:id="@+id/Low"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+        -->
 
     <!--Open-->
+    <!--
     <TextView
         android:id="@+id/Open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+        -->
 
 </RelativeLayout>

@@ -21,9 +21,9 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
             bidPoints = (TextView) view.findViewById(R.id.bidPoints);
             offerBig = (TextView) view.findViewById(R.id.offerBig);
             offerPoints = (TextView) view.findViewById(R.id.offerPoints);
-            High = (TextView) view.findViewById(R.id.High);
-            Low = (TextView) view.findViewById(R.id.Low);
-            Open = (TextView) view.findViewById(R.id.Open);
+            //High = (TextView) view.findViewById(R.id.High);
+            //Low = (TextView) view.findViewById(R.id.Low);
+            //Open = (TextView) view.findViewById(R.id.Open);
             }
         }
         public QuoteAdapter(List<Quote> quoteList){
@@ -42,12 +42,12 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
             holder.Name.setText(q.getName());
             //holder.timestamp.setText(q.getTimestamp());
             holder.bidBig.setText(q.getBidBig().toString());
-            holder.bidPoints.setText(q.getBidPoints());
+            holder.bidPoints.setText(String.valueOf(q.getBidPoints()));
             holder.offerBig.setText(q.getOfferBig().toString());
-            holder.offerPoints.setText(q.getOfferPoints());
-            holder.High.setText(q.getHigh().toString());
-            holder.Low.setText(q.getLow().toString());
-            holder.Open.setText(q.getOpen().toString());
+            holder.offerPoints.setText(String.valueOf(q.getOfferPoints()));
+            //holder.High.setText(q.getHigh().toString());
+            //holder.Low.setText(q.getLow().toString());
+            //holder.Open.setText(q.getOpen().toString());
         }
         @Override
         public int getItemCount() {

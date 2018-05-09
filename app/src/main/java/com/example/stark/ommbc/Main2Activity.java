@@ -23,6 +23,8 @@ public class Main2Activity extends AppCompatActivity {
     private List<Quote> quoteList = new ArrayList<>();
     private RecyclerView recyclerview;
     private QuoteAdapter qAdapter;
+    private Quote q;
+    private BigDecimal bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,11 @@ public class Main2Activity extends AppCompatActivity {
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerview.setAdapter(qAdapter);
 
+        try{
         prepareQuoteData();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         /*recyclerview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerview, new RecyclerTouchListener.ClickListener(){
             @Override
             public void onClick(View view, int position){
@@ -52,16 +58,29 @@ public class Main2Activity extends AppCompatActivity {
         */
     }
 
-    private void prepareQuoteData(){
-        BigDecimal bd = new BigDecimal("1.5");
+    private Quote genQuote(String name){
+        bd = new BigDecimal("1.5");
+        Quote qNew = new Quote(name, 123213,bd, 124,bd,34 ,bd,bd,bd );
+        return qNew;
+    }
 
+    private void prepareQuoteData() throws Exception{
 
-        // Aqui se craqshea, tal vez por los parsings, checa como agregar un quote a la lista
-        Quote q = new Quote("EUR/USD", 123213,bd, 124,bd,34 ,bd,bd,bd );
-        quoteList.add(q);
+        // Aqui se crashea, tal vez por los parsings, checa como agregar un quote a la lista
+        try{
+            //bd = new BigDecimal("1.5");
+            //q = new Quote("EUR/USD", 123213,bd, 124,bd,34 ,bd,bd,bd );
+            //quoteList.add(q);
+            //q = genQuote();
+            quoteList.add(genQuote("EUR/USD"));
+            quoteList.add(genQuote("EUR/JPY"));
+            quoteList.add(genQuote("GBP/AUD"));
 
-
-
+            //quoteList.add(q);
+            qAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
             //Quote qu = new Quote(
               //      "EUR/USD",
                 //    Long.parseLong("1234124123"),
@@ -85,7 +104,5 @@ public class Main2Activity extends AppCompatActivity {
                 new BigDecimal("200"),
                 new BigDecimal("200")));
                 */
-
-        qAdapter.notifyDataSetChanged();
     }
 }
