@@ -28,10 +28,10 @@ import java.util.List;
 
 
 public class Main2Activity extends AppCompatActivity {
+    private ClienteFree cliente;
     private List<Quote> quoteList = new ArrayList<>();
     private RecyclerView recyclerview;
     private QuoteAdapter qAdapter;
-    private Quote q;
     private BigDecimal bd;
 
     @Override
@@ -53,6 +53,7 @@ public class Main2Activity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         Intent myIntent = new Intent(Main2Activity.this,Problema_General.class);
                         myIntent.putExtra("Quote",quoteList.get(position));
+                        myIntent.putExtra("Cliente",cliente);
                         startActivity(myIntent);
                     }
 

@@ -41,7 +41,11 @@ public class Problema_General extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problema__general);
+        //Recuperar Quote y Cliente
         Quote quote = (Quote) getIntent().getSerializableExtra("Quote");
+        ClienteFree cliente = (ClienteFree) getIntent().getSerializableExtra("Cliente");
+
+        //Toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setTitle("Quote Details");
         TextView espacio_texto = (TextView)findViewById(R.id.espacio_texto);
@@ -57,6 +61,7 @@ public class Problema_General extends AppCompatActivity{
             public void onClick(View view) {
                 if(fav==0) {
                     //llamar Subscribe a este Quote
+
                     favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite1));
                     fav=1;
                 }
