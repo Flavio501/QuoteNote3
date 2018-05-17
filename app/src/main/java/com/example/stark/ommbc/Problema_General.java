@@ -50,7 +50,7 @@ public class Problema_General extends AppCompatActivity{
         myToolbar.setTitle("Quote Details");
         TextView espacio_texto = (TextView)findViewById(R.id.espacio_texto);
         espacio_texto.setText(quote.returnParams());
-        FloatingActionButton help = (FloatingActionButton)findViewById(R.id.help);
+        //FloatingActionButton help = (FloatingActionButton)findViewById(R.id.help);
         //FloatingActionButton send = (FloatingActionButton)findViewById(R.id.send);
         final FloatingActionButton favorite = (FloatingActionButton)findViewById(R.id.favorite);
 
@@ -61,6 +61,7 @@ public class Problema_General extends AppCompatActivity{
             public void onClick(View view) {
                 if(fav==0) {
                     //llamar Subscribe a este Quote
+
 
                     favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite1));
                     fav=1;

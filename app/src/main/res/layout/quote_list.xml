@@ -24,6 +24,7 @@
     <!--bidBig-->
     <TextView
         android:id="@+id/bidBig"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"/>
@@ -31,6 +32,7 @@
     <!--bidPoints-->
     <TextView
         android:id="@+id/bidPoints"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"
@@ -39,6 +41,7 @@
     <!--offerBig-->
     <TextView
         android:id="@+id/offerBig"
+        android:textColor="@color/colorAccent"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bidBig" />
@@ -46,6 +49,7 @@
     <!--offerPoints-->
     <TextView
         android:id="@+id/offerPoints"
+        android:textColor="@color/colorAccent"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bidBig"

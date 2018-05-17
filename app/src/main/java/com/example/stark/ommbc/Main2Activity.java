@@ -68,15 +68,6 @@ public class Main2Activity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        /*recyclerview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerview, new RecyclerTouchListener.ClickListener(){
-            @Override
-            public void onClick(View view, int position){
-                Quote quote = quoteList.get(position);
-                Toast.makeText(getApplicationContext(), quote.getName() + "fue selecionado!", Toast.LENGTH_SHORT).show();
-            }
-        }));
-        prepareQuoteData();
-        */
     }
 
     @Override
