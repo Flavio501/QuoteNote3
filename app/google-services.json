@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "475443183756",
+    "firebase_url": "https://quotenote-501.firebaseio.com",
+    "project_id": "quotenote-501",
+    "storage_bucket": "quotenote-501.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475443183756:android:1b08332c02328cf1",
+        "android_client_info": {
+          "package_name": "com.example.Flavio501.QuoteNote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475443183756-h3rdtsnjrjphdg7ckom7vu6fnfri5030.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFupAqADNu4EN9MgnPShVGyJdwklRJt4o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
