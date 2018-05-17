@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class RegisterController extends AppCompatActivity {
     Button validate;
     EditText email, password;
+    ClienteFree cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,8 @@ public class RegisterController extends AppCompatActivity {
             password.setError("Las Constraseñas No Coinciden");
             password.requestFocus();
         } else {
-            Intent intent = new Intent(this, MainActivity.class);
+
+            Intent intent = new Intent(RegisterController.this, MainActivity.class);
             startActivity(intent);
             Toast.makeText(RegisterController.this, "Se ha creado la cuenta!", Toast.LENGTH_LONG).show();
         }
