@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import org.junit.Test;
 

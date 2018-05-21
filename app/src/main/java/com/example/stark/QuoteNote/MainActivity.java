@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

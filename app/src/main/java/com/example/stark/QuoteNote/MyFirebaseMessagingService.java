@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

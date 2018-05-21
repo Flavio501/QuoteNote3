@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
     android:screenOrientation="portrait"
-tools:context="com.example.stark.ommbc.RegisterController"
+tools:context="com.example.stark.QuoteNote.RegisterController"
 tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.LinearLayoutCompat
@@ -14,8 +14,8 @@ tools:layout_editor_absoluteY="25dp">
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo" />
 
@@ -51,25 +51,6 @@ tools:layout_editor_absoluteY="25dp">
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:hint="Apellido"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="#003E5E"
-            android:textColorHint="#003E5E"
-            android:theme="@style/TextLabel" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_edit_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:hint="Numero Celular"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="#003E5E"

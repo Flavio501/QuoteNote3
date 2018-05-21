@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +31,10 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
         public QuoteAdapter(List<Quote> quoteList){
             this.quoteList = quoteList;
         }
+        public void updateList (List<Quote> list){
+        this.quoteList = list;
+        notifyDataSetChanged();
+        }
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,6 +44,7 @@ public class QuoteAdapter extends RecyclerView.Adapter<QuoteAdapter.MyViewHolder
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position){
+            //notifyDataSetChanged();
             Quote q = quoteList.get(position);
             holder.Name.setText(q.getName());
             //holder.timestamp.setText(q.getTimestamp());

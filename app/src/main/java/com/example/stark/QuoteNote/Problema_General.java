@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -32,6 +32,8 @@ import android.Manifest;
 import java.text.*;
 import android.database.Cursor;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 
 public class Problema_General extends AppCompatActivity{
 
@@ -50,6 +52,7 @@ public class Problema_General extends AppCompatActivity{
         myToolbar.setTitle("Quote Details");
         TextView espacio_texto = (TextView)findViewById(R.id.espacio_texto);
         espacio_texto.setText(quote.returnParams());
+        System.out.println(FirebaseInstanceId.getInstance().getToken());
         //FloatingActionButton help = (FloatingActionButton)findViewById(R.id.help);
         //FloatingActionButton send = (FloatingActionButton)findViewById(R.id.send);
         final FloatingActionButton favorite = (FloatingActionButton)findViewById(R.id.favorite);

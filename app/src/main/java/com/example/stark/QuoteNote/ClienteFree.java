@@ -1,4 +1,4 @@
-package com.example.stark.ommbc;
+package com.example.stark.QuoteNote;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.util.Observer;
 public class ClienteFree implements Observer, Serializable{
 
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 501L;
     private int clientID;
     private String Name;
     private String LastName;

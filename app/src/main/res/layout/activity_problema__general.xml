@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.stark.ommbc.Problema_General"
+    tools:context="com.example.stark.QuoteNote.Problema_General"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.Toolbar
