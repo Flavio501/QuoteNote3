@@ -50,7 +50,8 @@ public class Main2Activity extends AppCompatActivity {
     private Gson gson = new Gson();
 
     //MessageSender messager = new MessageSender();
-    String ip = "192.168.100.10";
+    //String ip = "192.168.100.10";
+    String ip = "10.12.47.30";
     int port = 7777;
     Socket socket;
     ObjectInputStream ois;
@@ -158,6 +159,8 @@ public class Main2Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Main2Activity.this,SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -223,6 +226,7 @@ public class Main2Activity extends AppCompatActivity {
                         System.out.println("Message received from the server : " + quoteList.getClass() );
                         break;
                     case"login":
+                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
                         break;
                 }
 
