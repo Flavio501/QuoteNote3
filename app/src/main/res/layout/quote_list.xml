@@ -18,42 +18,46 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textColor="@color/title"
-        android:textSize="16sp"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
     <!--bidBig-->
     <TextView
         android:id="@+id/bidBig"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_width="35dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Name"/>
+        android:layout_below="@id/Name"
+        android:textSize="18dp"/>
 
     <!--bidPoints-->
     <TextView
         android:id="@+id/bidPoints"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_width="35dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Name"
-        android:layout_toRightOf="@id/bidBig"/>
+        android:layout_toRightOf="@id/bidBig"
+        android:textSize="18dp"/>
 
     <!--offerBig-->
     <TextView
         android:id="@+id/offerBig"
         android:textColor="@color/colorAccent"
-        android:layout_width="35dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bidBig" />
+        android:layout_below="@id/bidBig"
+        android:textSize="18dp"/>
 
     <!--offerPoints-->
     <TextView
         android:id="@+id/offerPoints"
         android:textColor="@color/colorAccent"
-        android:layout_width="35dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/bidBig"
-        android:layout_toRightOf="@id/offerBig"/>
+        android:layout_toRightOf="@id/offerBig"
+        android:textSize="18dp"/>
 
     <!--High-->
     <!--

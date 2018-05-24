@@ -36,8 +36,9 @@ import java.math.BigDecimal;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -45,14 +46,11 @@ public class Main2Activity extends AppCompatActivity {
     private List<Quote> quoteList = new ArrayList<>();
     private RecyclerView recyclerview;
     private QuoteAdapter qAdapter;
-    private BigDecimal bd;
-    private API api = new API();
     private Gson gson = new Gson();
-
-    //MessageSender messager = new MessageSender();
-    //String ip = "192.168.100.10";
-    String ip = "10.12.47.30";
-    int port = 7777;
+    private Map<String,String> request = new HashMap<String,String>();
+    String ip = "192.168.100.10";
+    //String ip = "10.12.47.30";
+    int port = 8888;
     Socket socket;
     ObjectInputStream ois;
     ObjectOutputStream oos;
@@ -77,7 +75,8 @@ public class Main2Activity extends AppCompatActivity {
                         Intent myIntent = new Intent(Main2Activity.this,Problema_General.class);
                         myIntent.putExtra("Quote",quoteList.get(position));
                         myIntent.putExtra("Cliente",cliente);
-                        startActivity(myIntent);
+                        startActivityForResult(myIntent,1);
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -86,17 +85,35 @@ public class Main2Activity extends AppCompatActivity {
                 })
         );
         try{
+            request.put("request","quotes");
+            request.put("body","");
+
             new Thread (new Runnable() {
                 @Override
                 public void run() {
-                    //new quoteReceiverGson().execute();
-                    //Toast.makeText(getApplicationContext(), "Object received", Toast.LENGTH_LONG).show();
-
-                    new requestSenderGson("Quotes").execute();
+                    while(true){
+                        try{
+                            new requestSenderGson(request).execute();
+                            Thread.sleep(3000);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }).start();
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                cliente = (ClienteFree) data.getSerializableExtra("cliente");
+                System.out.println(cliente.getName());
+            }
         }
     }
 
@@ -109,7 +126,7 @@ public class Main2Activity extends AppCompatActivity {
                 public void run() {
                     while(true){
                         try{
-                            new requestSenderGson("Quotes").execute();
+                            new requestSenderGson(request).execute();
                             Thread.sleep(3000);
                         }catch(Exception e){
                             e.printStackTrace();
@@ -130,14 +147,13 @@ public class Main2Activity extends AppCompatActivity {
                 @Override
                 public void run() {
                     while(true){
-                            try{
-                                new requestSenderGson("Quotes").execute();
-                                Thread.sleep(3000);
-                            }catch(Exception e){
-                                e.printStackTrace();
-                            }
+                        try{
+                            new requestSenderGson(request).execute();
+                            Thread.sleep(3000);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     }
-
                 }
             }).start();
         }catch(Exception e){
@@ -166,37 +182,34 @@ public class Main2Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class quoteReceiverGson extends AsyncTask<Void,Void,Void> {
-
+    Thread quoteThread = new Thread (new Runnable() {
         @Override
-        protected Void doInBackground(Void...voids) {
-            try {
-                Socket s = new Socket(ip, port);
-                ConnectionHandler con = new ConnectionHandler(s);
-                quoteList = con.receiveQuoteGson();
-                //qAdapter.notifyDataSetChanged();
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        qAdapter.updateList(quoteList);
-                        Toast.makeText(getApplicationContext(), "Quotes updated", Toast.LENGTH_LONG).show();
-                    }
-                });
-                //con.stopInput();
-
-            } catch (Exception e) {
-                System.out.println(e);
+        public void run() {
+            while(true){
+                try{
+                    new requestSenderGson(request).execute();
+                    Thread.sleep(3000);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
-            return null;
         }
-    }
+    });
 
     public class requestSenderGson extends AsyncTask<Void,Void,Void> {
 
-        String request;
+        String requestGson;
 
         public requestSenderGson(String message){
-            this.request = message;
+            this.requestGson = message;
         }
+
+        public requestSenderGson(Map<String,String> map){
+            this.requestGson = gson.toJson(map);
+        }
+        //public requestSenderGson(Map<String, Map<String, String> > treemap){
+        //    this.requestGson = gson.toJson(treemap);
+        //}
 
         @Override
         protected Void doInBackground(Void...voids) {
@@ -206,15 +219,16 @@ public class Main2Activity extends AppCompatActivity {
 
                 //Send the message to the server
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                oos.writeObject(request);
+                oos.writeObject(requestGson);
                 oos.flush();
                 System.out.println("Message sent to the server : "+request);
 
                 //Get the return message from the server
                 ois = new ObjectInputStream(socket.getInputStream());
-                switch(request){
-                    case "Quotes":
+                switch(request.get("request")){
+                    case "quotes":
                         Type quoteListType = new TypeToken<List<Quote>>(){}.getType();
+                        //Type quoteSubsMap = new TypeToken< Map<String, Map<String,String> > >(){}.getType();
                         quoteList = gson.fromJson((String)(ois.readObject()), quoteListType);
                         ois.close();
                         runOnUiThread(new Runnable() {
@@ -225,102 +239,12 @@ public class Main2Activity extends AppCompatActivity {
                         });
                         System.out.println("Message received from the server : " + quoteList.getClass() );
                         break;
-                    case"login":
-                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
-                        break;
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
-        }
-    }
-
-    public class ConnectionHandler {
-        private Socket clientSocket;
-        private ObjectInputStream ois;
-        private ObjectOutputStream oos;
-
-        public ConnectionHandler(Socket clientSocket) {
-            this.clientSocket = clientSocket;
-            String clientAddress = clientSocket.getInetAddress().toString()
-                    .substring(1);
-            System.out.println("Connected to " + clientAddress);
-            try {
-                //oos = new ObjectOutputStream(clientSocket.getOutputStream());
-                ois = new ObjectInputStream(clientSocket.getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        public ConnectionHandler(Socket clientSocket, ObjectInputStream oi, ObjectOutputStream oo) {
-            this.clientSocket = clientSocket;
-            this.ois = oi;
-            this.oos = oo;
-            String clientAddress = clientSocket.getInetAddress().toString()
-                    .substring(1);
-            System.out.println("Connected to " + clientAddress);
-        }
-
-        public void stopInput() {
-            try {
-                ois.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        public void stopConnection() {
-            try {
-                clientSocket.close();
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        public void sendObject(Object o) {
-            try {
-                //oos = (ObjectOutputStream) clientSocket.getOutputStream();
-                oos.writeObject(o);
-                oos.flush();
-                oos.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        public ClienteFree receiveClient() throws Exception{
-            try {
-                //ois = (ObjectInputStream) clientSocket.getInputStream();
-                ClienteFree cliente = (ClienteFree)(ois.readObject());
-                //ois.close();
-                return cliente;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        public List<Quote> receiveQuoteGson() throws Exception{
-            try {
-                //ois = new ObjectInputStream(socket.getInputStream());
-                Type quoteListType = new TypeToken<List<Quote>>(){}.getType();
-                List<Quote> newQuotes = gson.fromJson((String)(ois.readObject()), quoteListType);
-                ois.close();
-                return newQuotes;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        public void stopOutput() {
-            try {
-                oos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 

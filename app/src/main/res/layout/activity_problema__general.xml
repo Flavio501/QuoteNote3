@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="440dp"
-        android:background="#0767A4"
+        android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
@@ -45,12 +45,87 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--Name-->
             <TextView
-                android:id="@+id/espacio_texto"
+                android:id="@+id/NameD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:text="TextView" />
+                android:layout_alignParentTop="true"
+                android:textColor="@color/title"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
+
+            <!--bidBig-->
+            <TextView
+                android:id="@+id/bidBigD"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Name"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--bidPoints-->
+            <TextView
+                android:id="@+id/bidPointsD"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Name"
+                android:layout_toRightOf="@id/bidBig"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--offerBig-->
+            <TextView
+                android:id="@+id/offerBigD"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bidBig"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--offerPoints-->
+            <TextView
+                android:id="@+id/offerPointsD"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bidBig"
+                android:layout_toRightOf="@id/offerBig"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--High-->
+            <TextView
+                android:id="@+id/HighD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/offerBigD"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--Low-->
+            <TextView
+                android:id="@+id/LowD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/offerBigD"
+                android:layout_toRightOf="@id/HighD"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
+
+            <!--Open-->
+            <TextView
+                android:id="@+id/OpenD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/offerBigD"
+                android:layout_toRightOf="@id/LowD"
+                android:textSize="22dp"
+                android:gravity="center_horizontal"/>
         </LinearLayout>
 
     </ScrollView>
