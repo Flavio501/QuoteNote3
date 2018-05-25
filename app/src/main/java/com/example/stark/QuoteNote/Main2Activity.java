@@ -48,8 +48,8 @@ public class Main2Activity extends AppCompatActivity {
     private QuoteAdapter qAdapter;
     private Gson gson = new Gson();
     private Map<String,String> request = new HashMap<String,String>();
-    String ip = "192.168.100.10";
-    //String ip = "10.12.47.30";
+    //String ip = "192.168.100.10";
+    String ip = "10.12.47.30";
     int port = 8888;
     Socket socket;
     ObjectInputStream ois;
@@ -59,6 +59,8 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        cliente = (ClienteFree) getIntent().getSerializableExtra("Cliente");
+        System.out.println("Cliente "+cliente.getName()+" recibido de Main");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -112,7 +114,7 @@ public class Main2Activity extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
                 cliente = (ClienteFree) data.getSerializableExtra("cliente");
-                System.out.println(cliente.getName());
+                System.out.println("List size: "+ cliente.subscriptions.size());
             }
         }
     }

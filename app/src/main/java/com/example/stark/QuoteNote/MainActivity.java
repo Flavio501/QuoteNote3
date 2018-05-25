@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText tEmail,tPass;
     Gson gson = new Gson();
     GsonBuilder gBuild = new GsonBuilder();
+    ClienteFree cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
 
 
     @Override
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     //Map<String,String> logRequest;
 
                     Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
+                    MyIntent.putExtra("Cliente",cliente);
                     startActivity(MyIntent);
                     finish(); //Block back button
                 }

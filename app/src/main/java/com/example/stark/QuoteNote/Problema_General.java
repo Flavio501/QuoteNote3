@@ -23,13 +23,13 @@ import com.google.gson.reflect.TypeToken;
 
 public class Problema_General extends AppCompatActivity{
 
-    int fav = 0;
+    int fav;
     TextView Name, bidBig, bidPoints, offerBig, offerPoints, High, Low, Open;
     private Gson gson = new Gson();
     private Map<String,String> subsRequest = new HashMap<String,String>();
 
-    String ip = "192.168.100.10";
-    //String ip = "10.12.47.30";
+    //String ip = "192.168.100.10";
+    String ip = "10.12.47.30";
     int port = 8888;
     Socket socket;
     ObjectInputStream ois;
@@ -44,7 +44,6 @@ public class Problema_General extends AppCompatActivity{
         //Recuperar Quote y Cliente
         quote = (Quote) getIntent().getSerializableExtra("Quote");
         cliente = (ClienteFree) getIntent().getSerializableExtra("Cliente");
-        cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
 
         //Toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -73,14 +72,20 @@ public class Problema_General extends AppCompatActivity{
         System.out.println("Firebase Token: " + FirebaseInstanceId.getInstance().getToken());
 
         final FloatingActionButton favorite = (FloatingActionButton) findViewById(R.id.favorite);
+        favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite0));
 
         try{
-            for(Quote q : cliente.subscriptions){
-                if(cliente.subscriptions.size() == 0 || cliente.subscriptions == null){
-                    break;
-                }
-                else if(q.getName() == quote.getName()){
-                    fav = 1;
+            if(cliente.subscriptions.isEmpty() || cliente.subscriptions == null){
+                System.out.println("No hay Suscripciones");
+                favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite0));
+                fav = 0;
+            }else{
+                for(Quote q : cliente.subscriptions){
+                    if(q.getName().contains(quote.getName())){
+                        favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite1));
+                        fav = 1;
+                        break;
+                    }
                 }
             }
         }catch(NullPointerException e){
@@ -113,7 +118,7 @@ public class Problema_General extends AppCompatActivity{
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                } else {
+                } else if(fav == 1){
                     //llamar Unsubscribe de este quote
                     try{
                         subsRequest.put("request","unsubscribe");
@@ -134,6 +139,24 @@ public class Problema_General extends AppCompatActivity{
                         favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite0));
                         fav = 0;
                     }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }else{
+                    try{
+                        if(cliente.subscriptions.isEmpty() || cliente.subscriptions == null){
+                            System.out.println("No hay Suscripciones");
+                            favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite0));
+                            fav = 0;
+                        }else{
+                            for(Quote q : cliente.subscriptions){
+                                if(q.getName().contains(quote.getName())){
+                                    favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite1));
+                                    fav = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }catch(NullPointerException e){
                         e.printStackTrace();
                     }
                 }
@@ -178,7 +201,8 @@ public class Problema_General extends AppCompatActivity{
                 switch(subsRequest.get("request")){
                     case "subscribe":
 
-                        cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        cliente.addQuote(quote);
                         ois.close();
                         runOnUiThread(new Runnable() {
                             public void run() {
@@ -189,8 +213,10 @@ public class Problema_General extends AppCompatActivity{
                         break;
                     case "unsubscribe":
 
-                        cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        cliente.removeQuote(quote);
                         ois.close();
+
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast.makeText(getApplicationContext(), "Unsubscribed from "+quote.getName()+"!", Toast.LENGTH_LONG).show();
