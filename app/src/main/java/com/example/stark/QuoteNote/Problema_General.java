@@ -28,9 +28,11 @@ public class Problema_General extends AppCompatActivity{
     private Gson gson = new Gson();
     private Map<String,String> subsRequest = new HashMap<String,String>();
 
-    String ip = "192.168.100.10";
+    //String ip = "192.168.100.10";
     //String ip = "10.12.47.30";
-    int port = 8888;
+    String ip = "10.12.33.143";//CETYS
+
+    int port = 7777;
     Socket socket;
     ObjectInputStream ois;
     ObjectOutputStream oos;
