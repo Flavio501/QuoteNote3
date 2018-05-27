@@ -26,7 +26,7 @@ public class ClienteFree implements Observer, Serializable{
     private String LastName;
     private String Email;
     private String Password;
-    private int pipChange = 4;
+    private int pipChange = 10;
     private int maxSubs = 10;
 
     List<Quote> subscriptions = new ArrayList<Quote>(maxSubs);
@@ -44,10 +44,6 @@ public class ClienteFree implements Observer, Serializable{
         this.firebaseToken = FirebaseInstanceId.getInstance().getToken();
     }
 
-    public String getName(){
-        return this.Name;
-    }
-
     public void addQuote(Quote q) {
         if(subscriptions.size() < maxSubs) {
             subscriptions.add(q);
@@ -58,10 +54,14 @@ public class ClienteFree implements Observer, Serializable{
     }
 
     public void removeQuote(Quote q) {
-        for(Quote quote : subscriptions){
-            if(q.getName().contains(quote.getName())){
-                subscriptions.remove(quote);
+        try {
+            for(Quote quote : subscriptions){
+                if(q.getName().contains(quote.getName())){
+                    subscriptions.remove(quote);
+                }
             }
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -142,6 +142,18 @@ public class ClienteFree implements Observer, Serializable{
             //}
             return false;
         }
+    }
+
+    public String getName(){
+        return this.Name;
+    }
+
+    public String getLastName(){
+        return this.LastName;
+    }
+
+    public String getEmail(){
+        return this.Email;
     }
 
     public void setPipChange(int pip) {

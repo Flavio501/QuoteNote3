@@ -1,40 +1,30 @@
 package com.example.stark.QuoteNote;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.net.Socket;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +34,17 @@ import java.util.Map;
 public class Main2Activity extends AppCompatActivity {
     private ClienteFree cliente;
     private List<Quote> quoteList = new ArrayList<>();
+    Quote tempQuote;
     private RecyclerView recyclerview;
     private QuoteAdapter qAdapter;
     private Gson gson = new Gson();
     private Map<String,String> request = new HashMap<String,String>();
-    //String ip = "192.168.100.10";
-    String ip = "10.12.47.30";
-    int port = 8888;
+    AlertDialog.Builder builder;
+    int sleepTime = 5000;
+    String ip = "192.168.100.10";
+    //String ip = "200.79.141.229";
+    //String ip = "10.12.47.30";
+    int port = 12345;
     Socket socket;
     ObjectInputStream ois;
     ObjectOutputStream oos;
@@ -63,6 +57,9 @@ public class Main2Activity extends AppCompatActivity {
         System.out.println("Cliente "+cliente.getName()+" recibido de Main");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        builder = new AlertDialog.Builder(Main2Activity.this);
+
 
         recyclerview = (RecyclerView) findViewById(R.id.recycler_view);
         qAdapter = new QuoteAdapter(quoteList);
@@ -78,7 +75,6 @@ public class Main2Activity extends AppCompatActivity {
                         myIntent.putExtra("Quote",quoteList.get(position));
                         myIntent.putExtra("Cliente",cliente);
                         startActivityForResult(myIntent,1);
-
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -96,7 +92,7 @@ public class Main2Activity extends AppCompatActivity {
                     while(true){
                         try{
                             new requestSenderGson(request).execute();
-                            Thread.sleep(3000);
+                            Thread.sleep(sleepTime);
                         }catch(Exception e){
                             e.printStackTrace();
                         }
@@ -117,6 +113,12 @@ public class Main2Activity extends AppCompatActivity {
                 System.out.println("List size: "+ cliente.subscriptions.size());
             }
         }
+        else if (requestCode == 2) {
+            if(resultCode == RESULT_OK) {
+                cliente = (ClienteFree) data.getSerializableExtra("cliente");
+                System.out.println("Pip Margin: "+ cliente.getPipChange() +" Pips");
+            }
+        }
     }
 
     @Override
@@ -129,7 +131,7 @@ public class Main2Activity extends AppCompatActivity {
                     while(true){
                         try{
                             new requestSenderGson(request).execute();
-                            Thread.sleep(3000);
+                            Thread.sleep(sleepTime);
                         }catch(Exception e){
                             e.printStackTrace();
                         }
@@ -151,7 +153,7 @@ public class Main2Activity extends AppCompatActivity {
                     while(true){
                         try{
                             new requestSenderGson(request).execute();
-                            Thread.sleep(3000);
+                            Thread.sleep(sleepTime);
                         }catch(Exception e){
                             e.printStackTrace();
                         }
@@ -172,31 +174,54 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_filter)
-            Toast.makeText(getApplicationContext(), "Búsqueda", Toast.LENGTH_SHORT).show();
+        if (id == R.id.action_filter) {
+            //Toast.makeText(getApplicationContext(), "Búsqueda", Toast.LENGTH_SHORT).show();
+            builder.setTitle("Enter Quote name: ");
 
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    try{
+                        for(Quote q : quoteList){
+                            if(q.getName().contains(input.getText().toString().toUpperCase())){
+                                tempQuote = q;
+                                break;
+                            }
+                        }
+                        Intent myIntent = new Intent(Main2Activity.this,Problema_General.class);
+                        myIntent.putExtra("Quote",quoteList.get(quoteList.indexOf(tempQuote)));
+                        myIntent.putExtra("Cliente",cliente);
+                        startActivityForResult(myIntent,1);
+                }catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(Main2Activity.this,"Please enter a valid Quote",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(Main2Activity.this,SettingsActivity.class);
-            startActivity(intent);
-            return true;
+        else if (id == R.id.action_settings) {
+            Intent setttingsIntent = new Intent(Main2Activity.this,Settings.class);
+            setttingsIntent.putExtra("Cliente",cliente);
+            startActivityForResult(setttingsIntent,2);
         }
         return super.onOptionsItemSelected(item);
     }
-
-    Thread quoteThread = new Thread (new Runnable() {
-        @Override
-        public void run() {
-            while(true){
-                try{
-                    new requestSenderGson(request).execute();
-                    Thread.sleep(3000);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }
-    });
 
     public class requestSenderGson extends AsyncTask<Void,Void,Void> {
 
@@ -209,9 +234,6 @@ public class Main2Activity extends AppCompatActivity {
         public requestSenderGson(Map<String,String> map){
             this.requestGson = gson.toJson(map);
         }
-        //public requestSenderGson(Map<String, Map<String, String> > treemap){
-        //    this.requestGson = gson.toJson(treemap);
-        //}
 
         @Override
         protected Void doInBackground(Void...voids) {
@@ -236,7 +258,6 @@ public class Main2Activity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 qAdapter.updateList(quoteList);
-                                //Toast.makeText(getApplicationContext(), "Quotes updated", Toast.LENGTH_LONG).show();
                             }
                         });
                         System.out.println("Message received from the server : " + quoteList.getClass() );

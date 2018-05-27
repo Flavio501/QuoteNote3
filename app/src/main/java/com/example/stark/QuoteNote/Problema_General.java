@@ -11,14 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.Socket;
 import java.util.*;
 
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 
 public class Problema_General extends AppCompatActivity{
@@ -28,9 +26,10 @@ public class Problema_General extends AppCompatActivity{
     private Gson gson = new Gson();
     private Map<String,String> subsRequest = new HashMap<String,String>();
 
-    //String ip = "192.168.100.10";
-    String ip = "10.12.47.30";
-    int port = 8888;
+    String ip = "192.168.100.10";
+    //String ip = "200.79.141.229";
+    //String ip = "10.12.47.30";
+    int port = 12345;
     Socket socket;
     ObjectInputStream ois;
     ObjectOutputStream oos;

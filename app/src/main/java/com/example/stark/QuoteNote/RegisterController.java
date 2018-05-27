@@ -21,8 +21,10 @@ import java.util.Map;
 
 public class RegisterController extends AppCompatActivity {
 
-    String ip = "10.12.33.143";//CETYS
-    int port = 7777;
+    //String ip = "10.12.33.143";//CETYS
+    String ip = "192.168.100.10";
+    //String ip = "200.79.141.229";
+    int port = 12345;
     Socket socket;
     ObjectInputStream ois;
     ObjectOutputStream oos;

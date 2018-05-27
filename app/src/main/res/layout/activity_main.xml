@@ -66,7 +66,7 @@
             android:id="@+id/text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo electr\u00F3nico"
+            android:hint="Email"
             android:drawableLeft="@drawable/ic_profile"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/ic_profile"
@@ -88,7 +88,7 @@
             android:id="@+id/text_input_edit_text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="Password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="#003E5E"
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="@null"
-            android:text="No eres miembro? Registrate!"
+            android:text="Not a member? Register now!"
             android:textAllCaps="false"
             android:textColor="#003E5E" />
 
