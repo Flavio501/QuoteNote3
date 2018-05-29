@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.*;
 
@@ -26,9 +28,9 @@ public class Problema_General extends AppCompatActivity{
     private Gson gson = new Gson();
     private Map<String,String> subsRequest = new HashMap<String,String>();
 
-    String ip = "192.168.100.10";
+    //String ip = "192.168.100.10";
     //String ip = "200.79.141.229";
-    //String ip = "10.12.47.30";
+    String ip = "10.12.47.30";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
@@ -43,6 +45,8 @@ public class Problema_General extends AppCompatActivity{
         //Recuperar Quote y Cliente
         quote = (Quote) getIntent().getSerializableExtra("Quote");
         cliente = (ClienteFree) getIntent().getSerializableExtra("Cliente");
+
+        cliente.setToken(FirebaseInstanceId.getInstance().getToken());
 
         //Toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -187,7 +191,8 @@ public class Problema_General extends AppCompatActivity{
         protected Void doInBackground(Void...voids) {
             try
             {
-                socket = new Socket(ip, port);
+                //socket = new Socket(ip, port);
+                socket = new Socket("app2.quotenote.com",port);
 
                 //Send the message to the server
                 oos = new ObjectOutputStream(socket.getOutputStream());
@@ -205,7 +210,7 @@ public class Problema_General extends AppCompatActivity{
                         ois.close();
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "Subscribed to "+quote.getName()+"!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Subscribed to "+quote.getName()+"!", Toast.LENGTH_SHORT).show();
                             }
                         });
                         System.out.println("Message received from the server : " + cliente.getName() );
@@ -218,7 +223,7 @@ public class Problema_General extends AppCompatActivity{
 
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "Unsubscribed from "+quote.getName()+"!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Unsubscribed from "+quote.getName()+"!", Toast.LENGTH_SHORT).show();
                             }
                         });
                         System.out.println("Message received from the server : " + cliente.getName());

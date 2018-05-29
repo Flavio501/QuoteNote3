@@ -9,7 +9,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         //registration token
         final String registrationToken = FirebaseInstanceId.getInstance().getToken();
 
-        //TODO
         //Send to the server to register and identify the entity(mobile devices,browser front-end apps) in order to send a push notification to this entity(mobile devices,browser front-end apps).
 
     }

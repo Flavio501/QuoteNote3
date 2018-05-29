@@ -26,7 +26,7 @@ public class ClienteFree implements Observer, Serializable{
     private String LastName;
     private String Email;
     private String Password;
-    private int pipChange = 10;
+    private int pipChange = 4;
     private int maxSubs = 10;
 
     List<Quote> subscriptions = new ArrayList<Quote>(maxSubs);

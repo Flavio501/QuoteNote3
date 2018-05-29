@@ -41,9 +41,9 @@ public class Main2Activity extends AppCompatActivity {
     private Map<String,String> request = new HashMap<String,String>();
     AlertDialog.Builder builder;
     int sleepTime = 5000;
-    String ip = "192.168.100.10";
+    //String ip = "192.168.100.10";
     //String ip = "200.79.141.229";
-    //String ip = "10.12.47.30";
+    String ip = "10.12.47.30";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
@@ -239,7 +239,8 @@ public class Main2Activity extends AppCompatActivity {
         protected Void doInBackground(Void...voids) {
             try
             {
-                socket = new Socket(ip, port);
+                //socket = new Socket(ip, port);
+                socket = new Socket("app2.quotenote.com",12345);
 
                 //Send the message to the server
                 oos = new ObjectOutputStream(socket.getOutputStream());

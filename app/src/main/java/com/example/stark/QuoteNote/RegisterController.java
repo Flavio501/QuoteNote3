@@ -22,7 +22,8 @@ import java.util.Map;
 public class RegisterController extends AppCompatActivity {
 
     //String ip = "10.12.33.143";//CETYS
-    String ip = "192.168.100.10";
+    //String ip = "192.168.100.10";
+    String ip = "10.12.47.30";
     //String ip = "200.79.141.229";
     int port = 12345;
     Socket socket;
@@ -105,7 +106,8 @@ public class RegisterController extends AppCompatActivity {
         protected Void doInBackground(Void...voids) {
             try
             {
-                socket = new Socket(ip, port);
+                //socket = new Socket(ip, port);
+                socket = new Socket("app2.quotenote.com",port);
 
                 //Send the message to the server
                 oos = new ObjectOutputStream(socket.getOutputStream());
