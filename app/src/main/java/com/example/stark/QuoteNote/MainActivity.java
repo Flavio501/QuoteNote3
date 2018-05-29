@@ -21,6 +21,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Type;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
     Gson gson = new Gson();
     GsonBuilder gBuild = new GsonBuilder();
     ClienteFree cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
+
+    //String ip = "192.168.100.10";
+    //String ip = "200.79.141.229";
+    String ip = "10.12.47.30";
+    int port = 12345;
+    Socket socket;
+    ObjectInputStream ois;
+    ObjectOutputStream oos;
+    private Map<String,String> request = new HashMap<String,String>();
 
 
     @Override
@@ -44,23 +54,31 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                    Evaluar si el correo y contra existen
-                */
 
-                //if(tEmail.getText().toString().length() == 0 || tPass.getText().toString().length() == 0){
-                  //  Toast.makeText(MainActivity.this,"Ingresa un Correo",Toast.LENGTH_LONG).show();
-                //}else{
+                try{
+                    if(tEmail.getText().toString().length() == 0 || tPass.getText().toString().length() == 0){
+                        Toast.makeText(MainActivity.this,"Ingresa un Correo",Toast.LENGTH_LONG).show();
+                    }else{
 
-                    //Map<String,String> logRequest;
+                        request.put("request","login");
+                        request.put("body",tEmail.getText().toString()+","+tPass.getText().toString());
 
-                    Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
-                    MyIntent.putExtra("Cliente",cliente);
-                    startActivity(MyIntent);
-                    finish(); //Block back button
+                        new requestSenderGson(request);
+
+                        try{
+                            Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
+                            MyIntent.putExtra("Cliente",cliente);
+                            startActivity(MyIntent);
+                            finish(); //Block back button
+                        }catch(Exception e){
+                            Toast.makeText(MainActivity.this,"Try again later",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }catch(Exception e){
+                    Toast.makeText(MainActivity.this,"Try again later",Toast.LENGTH_LONG).show();
                 }
 
-           // }
+            }
         });
 
         btnRegister = (Button) findViewById(R.id.menu_button_register);
@@ -73,5 +91,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public class requestSenderGson extends AsyncTask<Void,Void,Void> {
+
+        String requestGson;
+
+        public requestSenderGson(String message){
+            this.requestGson = message;
+        }
+
+        public requestSenderGson(Map<String,String> map){
+            this.requestGson = gson.toJson(map);
+        }
+
+        @Override
+        protected Void doInBackground(Void...voids) {
+            try
+            {
+                //socket = new Socket(ip, port);
+                socket = new Socket("app2.quotenote.com",port);
+
+                //Send the message to the server
+                oos = new ObjectOutputStream(socket.getOutputStream());
+                oos.writeObject(requestGson);
+                oos.flush();
+                System.out.println("Message sent to the server : "+request);
+
+                //Get the return message from the server
+                ois = new ObjectInputStream(socket.getInputStream());
+                switch(request.get("request")){
+                    case "login":
+                        cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        ois.close();
+                        System.out.println("Message received from the server : " + cliente.getName() );
+                        break;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
 }
 

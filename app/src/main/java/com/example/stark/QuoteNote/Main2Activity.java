@@ -240,7 +240,7 @@ public class Main2Activity extends AppCompatActivity {
             try
             {
                 //socket = new Socket(ip, port);
-                socket = new Socket("app2.quotenote.com",12345);
+                socket = new Socket("app2.quotenote.com",port);
 
                 //Send the message to the server
                 oos = new ObjectOutputStream(socket.getOutputStream());
