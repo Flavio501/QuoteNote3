@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     EditText tEmail,tPass;
     Gson gson = new Gson();
     GsonBuilder gBuild = new GsonBuilder();
-    ClienteFree cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
+    ClienteFree cliente;
+    //ClienteFree cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
 
     //String ip = "192.168.100.10";
     //String ip = "200.79.141.229";
@@ -56,23 +57,30 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try{
-                    if(tEmail.getText().toString().length() == 0 || tPass.getText().toString().length() == 0){
-                        Toast.makeText(MainActivity.this,"Ingresa un Correo",Toast.LENGTH_LONG).show();
-                    }else{
+                    if (tEmail.getText().toString().length() == 0 || tPass.getText().toString().length() == 0) {
+                        Toast.makeText(MainActivity.this, "Fill in username and password", Toast.LENGTH_SHORT).show();
 
-                        request.put("request","login");
-                        request.put("body",tEmail.getText().toString()+","+tPass.getText().toString());
+                    } else {
+                        Map<String, String> myMap = new HashMap<String, String>();
+                        myMap.put("request", "login");
+                        myMap.put("body", tEmail.getText().toString() + "," + tPass.getText().toString());
 
-                        new requestSenderGson(request);
+                        new requestSenderGson(myMap).execute();
+                        Thread.sleep(2000);
 
-                        try{
-                            Intent MyIntent = new Intent(MainActivity.this,Main2Activity.class);
-                            MyIntent.putExtra("Cliente",cliente);
-                            startActivity(MyIntent);
-                            finish(); //Block back button
-                        }catch(Exception e){
-                            Toast.makeText(MainActivity.this,"Try again later",Toast.LENGTH_LONG).show();
+                        if(cliente == null){
+                            Toast.makeText(MainActivity.this, "Please try again later", Toast.LENGTH_SHORT).show();
+                        }else{
+                            try{
+                                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+                                intent.putExtra("Cliente",cliente);
+                                startActivity(intent);
+                                finish();
+                            }catch(Exception e){
+                                Toast.makeText(MainActivity.this, "Please try again", Toast.LENGTH_SHORT).show();
+                            }
                         }
+
                     }
                 }catch(Exception e){
                     Toast.makeText(MainActivity.this,"Try again later",Toast.LENGTH_LONG).show();
@@ -114,18 +122,23 @@ public class MainActivity extends AppCompatActivity {
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 oos.writeObject(requestGson);
                 oos.flush();
-                System.out.println("Message sent to the server : "+request);
+                System.out.println("Message sent to the server : "+requestGson);
 
                 //Get the return message from the server
                 ois = new ObjectInputStream(socket.getInputStream());
-                switch(request.get("request")){
-                    case "login":
-                        cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
-                        ois.close();
-                        System.out.println("Message received from the server : " + cliente.getName() );
-                        break;
-                }
-
+                cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                ois.close();
+                Thread.sleep(2000);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            Toast.makeText(getApplicationContext(),"Welcome "+cliente.getName()+" !",Toast.LENGTH_LONG).show();
+                        }catch(Exception e){
+                            Toast.makeText(getApplicationContext(),"An error has occured...",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }

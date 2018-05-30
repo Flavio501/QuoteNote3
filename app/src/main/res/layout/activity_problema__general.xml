@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textColor="@color/title"
+                android:textColor="#db3434"
                 android:textSize="26dp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal" />

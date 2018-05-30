@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textColor="@color/title"
+        android:textColor="#db3434"
         android:textSize="24dp"
         android:textStyle="bold" />
 
@@ -58,29 +58,5 @@
         android:layout_below="@id/bidBig"
         android:layout_toRightOf="@id/offerBig"
         android:textSize="18dp"/>
-
-    <!--High-->
-    <!--
-    <TextView
-        android:id="@+id/High"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-        -->
-
-    <!--Low-->
-    <!--
-    <TextView
-        android:id="@+id/Low"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-        -->
-
-    <!--Open-->
-    <!--
-    <TextView
-        android:id="@+id/Open"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-        -->
 
 </RelativeLayout>

@@ -128,16 +128,7 @@ public class Problema_General extends AppCompatActivity{
                         subsRequest.put("quote",gson.toJson(quote));
                         subsRequest.put("client",gson.toJson(cliente));
 
-                        new Thread (new Runnable() {
-                            @Override
-                            public void run() {
-                                try{
-                                    new requestSenderGson(subsRequest).execute();
-                                }catch(Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }).start();
+                        new requestSenderGson(subsRequest).execute();
 
                         favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite0));
                         fav = 0;

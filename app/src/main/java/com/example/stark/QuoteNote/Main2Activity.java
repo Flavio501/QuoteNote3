@@ -54,7 +54,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         cliente = (ClienteFree) getIntent().getSerializableExtra("Cliente");
-        System.out.println("Cliente "+cliente.getName()+" recibido de Main");
+        //System.out.println("Cliente "+cliente.getName()+" recibido de Main");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
