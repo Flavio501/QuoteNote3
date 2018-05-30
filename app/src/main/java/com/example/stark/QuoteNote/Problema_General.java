@@ -105,16 +105,7 @@ public class Problema_General extends AppCompatActivity{
                         subsRequest.put("quote",gson.toJson(quote));
                         subsRequest.put("client",gson.toJson(cliente));
 
-                        new Thread (new Runnable() {
-                            @Override
-                            public void run() {
-                                try{
-                                    new requestSenderGson(subsRequest).execute();
-                                }catch(Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }).start();
+                        new requestSenderGson(subsRequest).execute();
 
                         favorite.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite1));
                         fav = 1;
@@ -196,7 +187,6 @@ public class Problema_General extends AppCompatActivity{
                 switch(subsRequest.get("request")){
                     case "subscribe":
 
-                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
                         cliente.addQuote(quote);
                         ois.close();
                         runOnUiThread(new Runnable() {
@@ -208,10 +198,10 @@ public class Problema_General extends AppCompatActivity{
                         break;
                     case "unsubscribe":
 
-                        //cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
+                        cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
                         cliente.removeQuote(quote);
                         ois.close();
-
+                        Thread.sleep(2000);
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast.makeText(getApplicationContext(), "Unsubscribed from "+quote.getName()+"!", Toast.LENGTH_SHORT).show();

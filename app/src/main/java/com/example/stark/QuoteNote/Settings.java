@@ -81,8 +81,8 @@ public class Settings extends AppCompatActivity {
 
                     new requestSenderGson(subsRequest).execute();
 
-                    Intent newIntent = new Intent(Settings.this,MainActivity.class);
-                    startActivity(newIntent);
+                    Intent intent = new Intent();
+                    setResult(2,intent);
                     finish();
 
                 }catch (Exception e){

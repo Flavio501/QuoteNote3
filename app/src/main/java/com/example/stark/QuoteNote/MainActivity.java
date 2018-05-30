@@ -32,11 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Gson gson = new Gson();
     GsonBuilder gBuild = new GsonBuilder();
     ClienteFree cliente;
-    //ClienteFree cliente = new ClienteFree("Flavio","Moreno","test@test.com","test");
 
-    //String ip = "192.168.100.10";
-    //String ip = "200.79.141.229";
-    String ip = "10.12.47.30";
+    //String ip = "10.12.47.30";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
@@ -47,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!isTaskRoot()) {
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         tEmail = (EditText) findViewById(R.id.text_input_edit_text);
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         myMap.put("body", tEmail.getText().toString() + "," + tPass.getText().toString());
 
                         new requestSenderGson(myMap).execute();
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
 
                         if(cliente == null){
                             Toast.makeText(MainActivity.this, "Please try again later", Toast.LENGTH_SHORT).show();
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 ois = new ObjectInputStream(socket.getInputStream());
                 cliente = gson.fromJson((String)(ois.readObject()), ClienteFree.class);
                 ois.close();
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

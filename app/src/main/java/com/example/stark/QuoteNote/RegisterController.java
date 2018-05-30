@@ -21,10 +21,7 @@ import java.util.Map;
 
 public class RegisterController extends AppCompatActivity {
 
-    //String ip = "10.12.33.143";//CETYS
-    //String ip = "192.168.100.10";
-    String ip = "10.12.47.30";
-    //String ip = "200.79.141.229";
+    //String ip = "10.12.47.30";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
@@ -65,11 +62,11 @@ public class RegisterController extends AppCompatActivity {
     public void validate(View view) {
         // Do something in response to button
         if (!validateEmail(email.getText().toString())) {
-            email.setError("Porfavor Escribe un Email Vàlido");
+            email.setError("Please enter a valid Email");
             email.requestFocus();
 
         } else if (validatePassword(password.getText().toString())) {
-            password.setError("Las Constraseñas No Coinciden");
+            password.setError("The passwords do not match");
             password.requestFocus();
         } else {
             try {
@@ -80,9 +77,7 @@ public class RegisterController extends AppCompatActivity {
                 myMap.put("request", "register");
                 myMap.put("body", gson.toJson(cliente));
 
-
                 new clientSenderGson(gson.toJson(myMap)).execute();
-
 
             }catch(Exception e){
                 e.printStackTrace();
@@ -90,9 +85,7 @@ public class RegisterController extends AppCompatActivity {
             Intent intent = new Intent(RegisterController.this, MainActivity.class);
             startActivity(intent);
         }
-
     }
-
 
     public class clientSenderGson extends AsyncTask<Void,Void,Void> {
 

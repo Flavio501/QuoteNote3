@@ -2,11 +2,13 @@ package com.example.stark.QuoteNote;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
-public class Quote extends Observable implements Serializable{
+public class Quote implements Serializable{
 
-    private long serialVersionUID = 100L;
+    public static final long serialVersionUID = 100L;
     private String Name;
     private long timestamp;
     private BigDecimal bidBig;
@@ -21,6 +23,10 @@ public class Quote extends Observable implements Serializable{
     private int oldbidPoints;
     private BigDecimal oldofferBig;
     private int oldofferPoints;
+
+    public boolean changed;
+
+    private List<ClienteFree> clientes = new ArrayList<ClienteFree>();
 
     public Quote(
             String Name,
@@ -84,6 +90,26 @@ public class Quote extends Observable implements Serializable{
         measurementsChanged();
     }
 
+    public void addObserver(ClienteFree o) {
+        this.clientes.add(o);
+    }
+
+    public void deleteObserver(ClienteFree o) {
+        for(ClienteFree c : clientes) {
+            if( o.getEmail().contains( c.getEmail() ) ){
+                clientes.remove(c);
+                break;
+            }
+        }
+    }
+
+    public void notifyObservers(Object o) {
+        for(ClienteFree c : clientes) {
+            c.update(this, o);
+        }
+        this.changed = false;
+    }
+
     public void setParameters(Wrapper w) {
         this.Name = w.Name;
         this.timestamp = w.timestamp;
@@ -98,11 +124,11 @@ public class Quote extends Observable implements Serializable{
         measurementsChanged();
     }
 
-    public void setOldParameters(Observable q) {
-        this.oldbidBig = ((Quote) q).bidBig;
-        this.oldbidPoints = ((Quote) q).bidPoints;
-        this.oldofferBig = ((Quote) q).offerBig;
-        this.oldofferPoints = ((Quote) q).offerPoints;
+    public void setOldParameters(Quote q) {
+        this.oldbidBig = q.bidBig;
+        this.oldbidPoints = q.bidPoints;
+        this.oldofferBig = q.offerBig;
+        this.oldofferPoints = q.offerPoints;
     }
 
     public String getName() {
@@ -145,35 +171,13 @@ public class Quote extends Observable implements Serializable{
         return this.oldofferPoints;
     }
 
-
-    public void printParams() {
-        System.out.println(getName() + " "
-                + getTimestamp() + " "
-                + getBidBig().toString()
-                + getBidPoints() + " "
-                + getOfferBig().toString()
-                + getOfferPoints() + " "
-                + getHigh() + " "
-                + getLow() + " "
-                + getOpen());
-    }
-
-    public String returnParams(){
-        return (this.getName() + " "
-                + this.getTimestamp() + " "
-                + this.getBidBig().toString()
-                + this.getBidPoints() + " "
-                + this.getOfferBig().toString()
-                + this.getOfferPoints() + " "
-                + this.getHigh() + " "
-                + this.getLow() + " "
-                + this.getOpen());
-    }
-
     public void measurementsChanged() {
         setChanged();
-        //notifyObservers(new Wrapper(Name,timestamp,bidBig,bidPoints,offerBig,offerPoints,High,Low,Open));
         notifyObservers(this);
+    }
+
+    public void setChanged() {
+        this.changed = true;
     }
 
 }

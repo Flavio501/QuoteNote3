@@ -41,9 +41,7 @@ public class Main2Activity extends AppCompatActivity {
     private Map<String,String> request = new HashMap<String,String>();
     AlertDialog.Builder builder;
     int sleepTime = 5000;
-    //String ip = "192.168.100.10";
-    //String ip = "200.79.141.229";
-    String ip = "10.12.47.30";
+    //String ip = "10.12.47.30";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
@@ -117,6 +115,9 @@ public class Main2Activity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 cliente = (ClienteFree) data.getSerializableExtra("cliente");
                 System.out.println("Pip Margin: "+ cliente.getPipChange() +" Pips");
+            }else if(resultCode == 2){
+                finish();
+                System.exit(0);
             }
         }
     }
