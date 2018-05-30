@@ -117,7 +117,7 @@
             android:layout_marginBottom="28dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:hint="Confirma Password"
+            android:hint="Confirm Password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:textColor="#003E5E"

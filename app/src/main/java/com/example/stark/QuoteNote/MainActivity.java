@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.multidex.MultiDexApplication;
+import android.support.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ClienteFree cliente;
 
     //String ip = "10.12.47.30";
+    //String ip ="192.168.1.65";
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;

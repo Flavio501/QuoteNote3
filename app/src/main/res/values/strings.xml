@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">QuoteNote</string>
+    <string name="desc">Image</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_main_tabbed">MainTabbed</string>
     <string name="action_settings">Settings</string>

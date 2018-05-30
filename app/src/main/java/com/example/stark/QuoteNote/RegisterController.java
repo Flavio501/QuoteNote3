@@ -22,6 +22,8 @@ import java.util.Map;
 public class RegisterController extends AppCompatActivity {
 
     //String ip = "10.12.47.30";
+    //String ip ="192.168.1.65";
+
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;

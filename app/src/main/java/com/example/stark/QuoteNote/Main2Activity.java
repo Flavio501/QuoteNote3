@@ -42,6 +42,8 @@ public class Main2Activity extends AppCompatActivity {
     AlertDialog.Builder builder;
     int sleepTime = 5000;
     //String ip = "10.12.47.30";
+    //String ip ="192.168.1.65";
+
     int port = 12345;
     Socket socket;
     ObjectInputStream ois;
